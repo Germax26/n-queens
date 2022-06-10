@@ -74,26 +74,35 @@ def solve(*, method, silent):
 			print_pos(pos)
 
 if __name__ == "__main__":
+
+	def usage():
+		print(f"usage: {sys.argv[0]} <method> [--silent] [-s]")
+		print("\nThe available methods are:\n\toct - for using base 8\n\trec - for using recursion")
+
 	method = None
-	try:
-		match sys.argv[1]:
-			case 'oct':
-				method = solve_in_oct
-			case 'rec':
-				method = solve_in_rec
-			case _:
-				print("Unknown method")
-	except IndexError:
-		print("Expected method argument")
+	silent = False
+
+	if len(sys.argv) == 1:
+		usage()
 		exit(1)
 
-	silent = False
-	try:
-		match sys.argv[2]:
-			case '--silent' | '-s':
-				silent = True
-			case _:
-				print("Unknown argument")
-	except IndexError:pass
+	for i in sys.argv[1:]:
+		if i.startswith('-'):
+			match i[1:]:
+				case '-silent' | 's':
+					silent = True
+		else:
+			if method is not None:
+				usage()
+				print(f"Unknown argument: '{i}'")
+				exit(1)
+			match i:
+				case 'rec':
+					method = solve_in_rec
+				case 'oct':
+					method = solve_in_oct
+				case _:
+					usage()
+					print(f"Unknown method: '{i}'")
 
 	solve(method=method, silent=silent)
