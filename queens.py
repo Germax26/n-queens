@@ -83,9 +83,17 @@ if __name__ == "__main__":
 	num = 0
 	if silent:
 		for _ in get_solutions(): num += 1
-		print("Total solutions:", num)
+		match num:
+			case 0:
+				print("No solutions")
+			case 1:
+				print("1 solution")
+			case _:
+				print(num, "solutions")
 	else:
 		for pos in get_solutions():
 			num += 1
 			print("-" * (HEIGHT * 2 - 1), num)
 			print_pos(pos)
+		if not num:
+			print("No solutions")
