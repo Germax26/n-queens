@@ -65,7 +65,8 @@ def solve_in_rec():
 def solve(*, method, silent):
 	num = 0
 	if silent:
-		for _ in method(): pass
+		for _ in method(): num += 1
+		print("Total solutions:", num)
 	else:
 		for pos in method():
 			num += 1
