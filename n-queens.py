@@ -1,5 +1,7 @@
 #! python3
 
+### N Queens v1.1.0 ###
+
 import sys
 
 VERSION = "v1.1.0"
