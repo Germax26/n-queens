@@ -50,9 +50,15 @@ if __name__ == "__main__":
 
 	for i in sys.argv[1:]:
 		if i.startswith('-'):
-			match i[1:]:
-				case '-silent' | 'S':
+			match i[1:].split('='):
+				case ['-silent' | 'S']:
 					silent = True
+				case ['-width' | 'W', w]:
+					WIDTH = int(w)
+				case ['-height' | 'H', h]:
+					HEIGHT = int(h)
+				case ['N', n]:
+					N = int(n)
 				case _:
 					usage()
 					print(f"Unknown flag: '{i}'")
