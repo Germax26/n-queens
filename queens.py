@@ -31,8 +31,8 @@ def get_solutions():
 		if len(pos) == N:
 			yield pos
 		else:
-			for i in range(max(pos) if pos else 0, WIDTH):
-				for j in range(HEIGHT):
+			for i in range(max(pos) if pos else 0, HEIGHT):
+				for j in range(WIDTH):
 					if i not in pos:
 						new_pos = pos | {i: j}
 						if is_solution(new_pos):
