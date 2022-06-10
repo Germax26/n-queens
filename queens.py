@@ -1,3 +1,5 @@
+#! python3
+
 import sys
 
 WIDTH, HEIGHT, N = 8, 8, 8
