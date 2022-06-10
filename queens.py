@@ -8,7 +8,9 @@ def print_pos(pos):
 	for i in range(HEIGHT):
 		if i in pos:
 			j = pos[i]
-			print(". " * j + "#" + " ." * (HEIGHT - 1 - j))
+			print(". " * j + "#" + " ." * (WIDTH - 1 - j))
+		else:
+			print(". " * WIDTH)
 
 def is_solution(pos):
 	"""
