@@ -29,28 +29,8 @@ def is_nondiagonal(pos):
 
 def is_solution(pos):
 	return is_unique(pos) and is_nondiagonal(pos)
-
-
-def solve_in_oct():
-	def incrementer(pos):
-		yield  
-		while True:
-			ix = -1
-			pos[ix] += 1
-			while pos[ix] >= 8:
-				pos[ix] = 0
-				ix -= 1
-				if -ix > len(pos): return
-				pos[ix] += 1
-			yield
-
-	pos = [0] * 8
-
-	for _ in incrementer(pos):
-		if is_solution(pos):
-			yield pos
 			
-def solve_in_rec():
+def get_solutions():
 	def impl(pos):
 		if len(pos) == 8:
 			yield pos
@@ -61,17 +41,6 @@ def solve_in_rec():
 					yield from impl(new_pos)
 
 	yield from impl([])
-				 
-def solve(*, method, silent):
-	num = 0
-	if silent:
-		for _ in method(): num += 1
-		print("Total solutions:", num)
-	else:
-		for pos in method():
-			num += 1
-			print("-" * 15, num)
-			print_pos(pos)
 
 if __name__ == "__main__":
 
@@ -79,12 +48,7 @@ if __name__ == "__main__":
 		print(f"usage: {sys.argv[0]} <method> [--silent] [-s]")
 		print("\nThe available methods are:\n\toct - for using base 8\n\trec - for using recursion")
 
-	method = None
 	silent = False
-
-	if len(sys.argv) == 1:
-		usage()
-		exit(1)
 
 	for i in sys.argv[1:]:
 		if i.startswith('-'):
@@ -95,18 +59,13 @@ if __name__ == "__main__":
 					usage()
 					print(f"Unknown flag: '{i}'")
 					exit(1)
-		else:
-			if method is not None:
-				usage()
-				print(f"Unknown argument: '{i}'")
-				exit(1)
-			match i:
-				case 'rec':
-					method = solve_in_rec
-				case 'oct':
-					method = solve_in_oct
-				case _:
-					usage()
-					print(f"Unknown method: '{i}'")
 
-	solve(method=method, silent=silent)
+	num = 0
+	if silent:
+		for _ in get_solutions(): num += 1
+		print("Total solutions:", num)
+	else:
+		for pos in get_solutions():
+			num += 1
+			print("-" * 15, num)
+			print_pos(pos)
