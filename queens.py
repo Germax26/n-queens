@@ -46,7 +46,6 @@ if __name__ == "__main__":
 
 	def usage():
 		print(f"usage: {sys.argv[0]} [--width=<width>] [-W=<width>] [--height=<height>] [-H=<height>] [-N=<N>] [--silent] [-S]")
-		print("\nThe available methods are:\n\toct - for using base 8\n\trec - for using recursion")
 
 	silent = False
 
