@@ -2,6 +2,8 @@
 
 import sys
 
+VERSION = "v1.1.0"
+
 WIDTH, HEIGHT, N = 8, 8, 8
 
 assert N <= min(WIDTH, HEIGHT)
@@ -45,7 +47,7 @@ def get_solutions():
 if __name__ == "__main__":
 
 	def usage():
-		print(f"usage: {sys.argv[0]} [--width=<width>] [-W=<width>] [--height=<height>] [-H=<height>] [-N=<N>] [--silent] [-S]")
+		print(f"usage: {sys.argv[0]} [--width=<width>] [-W=<width>] [--height=<height>] [-H=<height>] [-N=<N>] [--silent] [-S] [--version] [-V|v] [--help] [-h]")
 		print()
 		
 	silent = False
@@ -61,6 +63,12 @@ if __name__ == "__main__":
 					HEIGHT = int(h)
 				case ['N', n]:
 					N = int(n)
+				case ['-version' | 'v' | 'V']:
+					print(VERSION)
+					exit(0)
+				case ['-help' | 'h']:
+					usage()
+					exit(0)
 				case _:
 					usage()
 					print(f"Unknown flag: '{i}'")
