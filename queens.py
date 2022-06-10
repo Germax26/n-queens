@@ -65,6 +65,10 @@ if __name__ == "__main__":
 					usage()
 					print(f"Unknown flag: '{i}'")
 					exit(1)
+		else:
+			usage()
+			print(f"Unknown argument '{i}'")
+			exit(1)
 
 	if min(WIDTH, HEIGHT) <= 0:
 		print("The board cannot have non-positive dimentions.")
