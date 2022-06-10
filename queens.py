@@ -1,8 +1,10 @@
 import sys
 
+WIDTH, HEIGHT = 5, 8
+
 def print_pos(pos):
 	for i in pos:
-		print(". " * i + "#" + " ." * (7 - i))
+		print(". " * i + "#" + " ." * (HEIGHT - 1 - i))
 
 def is_unique(pos):
 	"""
@@ -32,10 +34,10 @@ def is_solution(pos):
 			
 def get_solutions():
 	def impl(pos):
-		if len(pos) == 8:
+		if len(pos) == WIDTH:
 			yield pos
 		else:
-			for i in range(8):
+			for i in range(HEIGHT):
 				new_pos = pos + [i]
 				if is_solution(new_pos):
 					yield from impl(new_pos)
@@ -67,5 +69,5 @@ if __name__ == "__main__":
 	else:
 		for pos in get_solutions():
 			num += 1
-			print("-" * 15, num)
+			print("-" * (HEIGHT * 2 - 1), num)
 			print_pos(pos)
