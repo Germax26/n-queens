@@ -91,6 +91,10 @@ if __name__ == "__main__":
 			match i[1:]:
 				case '-silent' | 's':
 					silent = True
+				case _:
+					usage()
+					print(f"Unknown flag: '{i}'")
+					exit(1)
 		else:
 			if method is not None:
 				usage()
