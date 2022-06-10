@@ -53,7 +53,7 @@ if __name__ == "__main__":
 	for i in sys.argv[1:]:
 		if i.startswith('-'):
 			match i[1:]:
-				case '-silent' | 's':
+				case '-silent' | 'S':
 					silent = True
 				case _:
 					usage()
