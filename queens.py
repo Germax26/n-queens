@@ -45,7 +45,7 @@ def get_solutions():
 if __name__ == "__main__":
 
 	def usage():
-		print(f"usage: {sys.argv[0]} <method> [--silent] [-s]")
+		print(f"usage: {sys.argv[0]} <method> [--silent] [-S]")
 		print("\nThe available methods are:\n\toct - for using base 8\n\trec - for using recursion")
 
 	silent = False
