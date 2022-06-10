@@ -64,6 +64,22 @@ if __name__ == "__main__":
 					print(f"Unknown flag: '{i}'")
 					exit(1)
 
+	if min(WIDTH, HEIGHT) <= 0:
+		print("The board cannot have non-positive dimentions.")
+		exit(1)
+
+	if N < 0:
+		print("There cannot be a number of negative queens.")
+		exit(1)
+
+	if N > min(WIDTH, HEIGHT):
+		print(f"Cannot place {N} queens on an {WIDTH} x {HEIGHT} board.")
+		if N > WIDTH:
+			print("There are not enough columns.")
+		if N > HEIGHT:
+			print("There are not enough rows.")
+		exit(1)
+
 	num = 0
 	if silent:
 		for _ in get_solutions(): num += 1
