@@ -46,7 +46,8 @@ if __name__ == "__main__":
 
 	def usage():
 		print(f"usage: {sys.argv[0]} [--width=<width>] [-W=<width>] [--height=<height>] [-H=<height>] [-N=<N>] [--silent] [-S]")
-
+		print()
+		
 	silent = False
 
 	for i in sys.argv[1:]:
