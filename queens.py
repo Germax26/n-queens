@@ -1,48 +1,42 @@
 import sys
 
-WIDTH, HEIGHT = 5, 8
+WIDTH, HEIGHT, N = 8, 8, 8
+
+assert N <= min(WIDTH, HEIGHT)
 
 def print_pos(pos):
-	for i in pos:
-		print(". " * i + "#" + " ." * (HEIGHT - 1 - i))
+	for i in range(HEIGHT):
+		if i in pos:
+			j = pos[i]
+			print(". " * j + "#" + " ." * (HEIGHT - 1 - j))
 
-def is_unique(pos):
-	"""
-	The way this works is by checking that there aren't
-	any duplication digits (by checkin that the set of
-	all the digits in poses doesn't fall below 8), if so,
-	it means that there are no queens on the same row.
-	"""
-
-	return len(set(pos)) == len(pos)
-
-def is_nondiagonal(pos):
+def is_solution(pos):
 	"""
 	The way this works is by going through each digit pair 
-	and checking if the difference in position is equal to 
-	the difference in the value of the digits. If so, it
-	means that the queens are on a diagonal
+	and checking if either the rows are equal, or the 
+	difference in the value of the digits is equal to the
+	difference in the indexes. If so, then that means that
+	the queens can attack each other.
 	"""
-	for i in range(len(pos)):
-		for j in range(i + 1, len(pos)):
-			if abs(pos[i] - pos[j]) == abs(i - j):
+	for i, k in enumerate(pos):
+		for j, l in enumerate(pos):
+			if i < j and (pos[k] == pos[l] or abs(pos[k] - pos[l]) == abs(k - l)):
 				return False
 	return True
 
-def is_solution(pos):
-	return is_unique(pos) and is_nondiagonal(pos)
-			
 def get_solutions():
 	def impl(pos):
-		if len(pos) == WIDTH:
+		if len(pos) == N:
 			yield pos
 		else:
-			for i in range(HEIGHT):
-				new_pos = pos + [i]
-				if is_solution(new_pos):
-					yield from impl(new_pos)
+			for i in range(max(pos) if pos else 0, WIDTH):
+				for j in range(HEIGHT):
+					if i not in pos:
+						new_pos = pos | {i: j}
+						if is_solution(new_pos):
+							yield from impl(new_pos)
 
-	yield from impl([])
+	yield from impl({})
 
 if __name__ == "__main__":
 
